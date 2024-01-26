@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/swcrc",
+  "sourceMaps": true,
+  "module": {
+    "type": "commonjs",
+    "lazy": true,
+    "noInterop": false
+
+  },
+  "jsc": {
+    "target": "es2022",
+    "keepClassNames": true,
+    "externalHelpers": true,
+    "parser": {
+      "syntax": "typescript",
+      "decorators": true,
+      "dynamicImport": true,
+      "noEarlyErrors": true
+    },
+    "transform": {
+      "legacyDecorator": false,
+      "decoratorMetadata": true,
+      "useDefineForClassFields": true
+    },
+    "baseUrl": "./",
+    "paths": {
+      "@": ["src"],
+      "@/*": ["src/*"],
+      "@test/*": ["test/helper/*"]
+    }
+  },
+  "minify": false
+}

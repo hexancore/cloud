@@ -1,0 +1,19 @@
+name: 'test'
+description: 'execute tests'
+runs:
+  using: 'composite'
+  steps:
+    # Docker compose up
+    - name: docker-compose up
+      shell: bash
+      run: |
+        make init_tmp
+        make up
+    # Yarn test
+    - name: test
+      shell: bash
+      run: yarn test
+    # Docker compose down
+    - name: docker-compose down
+      shell: bash
+      run: make down
