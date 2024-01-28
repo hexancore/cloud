@@ -31,7 +31,7 @@ const INTERNAL_MODULE_S3_CLIENT_TOKEN = '__HC_S3_CLIENT';
 
 const { ConfigurableModuleClass } = new ConfigurableModuleBuilder<S3ModuleOptions>()
   .setClassMethodName('forRoot')
-  .setExtras({ global: true, s3ClientToken: S3Client, bucketPrefix: '', configPath: 'core.s3' }, (def, extras) => {
+  .setExtras({ global: true, s3ClientToken: S3Client, configPath: 'core.s3' }, (def, extras) => {
     def.providers = def.providers ?? [];
     def.exports = def.exports ?? [];
 
@@ -45,8 +45,8 @@ const { ConfigurableModuleClass } = new ConfigurableModuleBuilder<S3ModuleOption
 
     def.providers.push({
       provide: S3,
-      inject: [extras.s3ClientToken],
-      useFactory: (client: S3Client) => new S3(client, extras.bucketPrefix),
+      inject: [extras.s3ClientToken, AppConfig],
+      useFactory: (client: S3Client, c: AppConfig) => new S3(client, c.config.get(extras.configPath + '.bucketPrefix', '')),
     });
 
     def.exports.push(S3);
