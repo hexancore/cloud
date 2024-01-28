@@ -10,7 +10,7 @@ module.exports = {
     sourceType: 'module',
     extraFileExtensions: ['vue'],
   },
-  plugins: ['@typescript-eslint', "unused-imports"],
+  plugins: ['@typescript-eslint', 'unused-imports'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
@@ -23,7 +23,10 @@ module.exports = {
         varsIgnorePattern: '^',
       },
     ],
-    '@typescript-eslint/explicit-module-boundary-types': ['error', { allowArgumentsExplicitlyTypedAsAny: true }],
+    '@typescript-eslint/explicit-module-boundary-types': [
+      'error',
+      { allowArgumentsExplicitlyTypedAsAny: true },
+    ],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'error',
@@ -32,6 +35,6 @@ module.exports = {
     'array-bracket-newline': 'off',
     'function-call-argument-newline': 'off',
     'no-console': 'off',
-    "unused-imports/no-unused-imports": "warn",
+    'unused-imports/no-unused-imports': 'warn',
   },
 };

@@ -13,5 +13,7 @@ jobs:
         uses: hexancore/yarn-ci-install@0.1.0
       - name: Lint
         run: yarn lint
-      - name: test
+      - name: Test
         uses: ./.github/actions/test
+      - name: Build
+        run: yarn build

@@ -1,7 +1,9 @@
-PROJECT = hexancore-cloud
+PROJECT = hc-cloud
 
 up:
 	docker compose -p $(PROJECT) --env-file ./docker/.env up -d --wait --wait-timeout 5
+	sleep 1
+	docker logs hc-cloud-s3
 down:
 	docker compose -p $(PROJECT) down -t 2
 

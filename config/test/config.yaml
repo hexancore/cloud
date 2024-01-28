@@ -1,3 +1,4 @@
 core:
   s3:
-    endpoint: http://127.0.0.1:20011
+    endpoint: http://localhost:20011
+    region: eu-west-1

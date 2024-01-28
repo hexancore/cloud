@@ -4,13 +4,10 @@ services:
     image: "zenko/cloudserver:latest-7.70.10"
     container_name: ${PROJECT}-s3
     restart: always
-    volumes:
-      - ${HOST_DATA_DIR}/zenko/localData:/usr/src/app/localData
-      - ${HOST_DATA_DIR}/zenko/localMetadata:/usr/src/app/localMetadata
     ports:
       - ${ZENKO_HOST_PORT}:8000
     environment:
-      ENDPOINT: 127.0.0.1
+      ENDPOINT: localhost
       REMOTE_MANAGEMENT_DISABLE: 1
       SCALITY_ACCESS_KEY_ID: ${ZENKO_ACCESS_KEY_ID}
       SCALITY_SECRET_ACCESS_KEY: ${ZENKO_SECRET_ACCESS_KEY}
