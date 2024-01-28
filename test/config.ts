@@ -5,7 +5,7 @@ import { existsSync, mkdirSync } from 'fs';
 import '@hexancore/common/testutil';
 
 process.env['APP_ENV'] = 'test';
-process.env['APP_ID'] = 'core';
+process.env['APP_ID'] = 'cloud';
 AppMeta.setProvider(EnvAppMetaProvider);
 
 process.env['TEST_TMP_DIR'] = path.join(__dirname, 'tmp');

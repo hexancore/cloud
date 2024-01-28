@@ -1,8 +1,8 @@
 version: '3.6'
 services:
-  zenko:
+  s3:
     image: "zenko/cloudserver:latest-7.70.10"
-    container_name: ${PROJECT}-zenko
+    container_name: ${PROJECT}-s3
     restart: always
     volumes:
       - ${HOST_DATA_DIR}/zenko/localData:/usr/src/app/localData

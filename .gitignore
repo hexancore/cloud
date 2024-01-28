@@ -8,16 +8,17 @@
 !.yarn/versions
 node_modules
 
-
-node_modules
+# Build
 lib
-coverage
 *.tsbuildinfo
-/**/test/coverage
 *.log
-.yalc/**
-.jestrc.json
 
+# Yalc
+.yalc/**
 yalc.lock
+
+# Test
+coverage
+/**/test/coverage
 /test/tmp/**
 /tmp/**
