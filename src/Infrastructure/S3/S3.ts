@@ -26,7 +26,7 @@ import {
   S3ServiceException,
   StorageClass,
 } from '@aws-sdk/client-s3';
-import { AR, ARW, ERR, InternalError, NeverError, OK, OKA, P } from '@hexancore/common';
+import { AR, ARW, AppError, ERR, InternalError, NeverError, OK, OKA, P } from '@hexancore/common';
 import { NodeJsRuntimeStreamingBlobPayloadInputTypes } from '@smithy/types';
 import {
   S3DeleteObjectOutput,
@@ -103,9 +103,9 @@ export class S3 {
 
     return this.send<HeadBucketCommandOutput>(command)
       .mapToTrue()
-      .onErr((e) => {
-        const error: S3ServiceException = e.error as any;
-        if (error['$metadata'].httpStatusCode === 404) {
+      .onErr((e: AppError<InternalError, S3ServiceException>) => {
+        const error: S3ServiceException = e.error;
+        if (error instanceof S3ServiceException && error['$metadata'].httpStatusCode === 404) {
           return OK(false);
         }
         return ERR(e);
@@ -214,7 +214,7 @@ export class S3 {
       StorageClass: options?.storageClass,
       ObjectLockMode: options?.objectLockMode,
       SSEKMSKeyId: options?.sseKMSKeyId,
-      
+
     });
 
     return this.send<PutObjectCommandOutput>(command).onOk((o) => {

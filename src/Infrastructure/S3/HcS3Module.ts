@@ -21,6 +21,9 @@ const s3ClientProviderFactory = (s3ClientToken: InjectionToken, configPath?: str
         accessKeyId: creds.accessKeyId ?? '',
         secretAccessKey: creds.secretAccessKey ?? '',
       },
+      retryMode: 'adaptive',
+      maxAttempts: 5,
+      
     });
   },
 });

@@ -16,8 +16,13 @@ describe(' AccountsSharedBucket', () => {
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      imports: [HcModule.forRoot({ accountContext: { useCls: false, currentAccountId: AccountId.cs('account1') } }), HcS3Module.forRoot({})],
+      imports: [
+        HcModule.forRoot({ accountContext: { useCls: false, currentAccountId: AccountId.cs('account1') } }),
+        HcS3Module.forRoot({}),
+      ],
     }).compile();
+
+    module.enableShutdownHooks();
 
     s3 = module.get(S3);
   });
@@ -29,7 +34,9 @@ describe(' AccountsSharedBucket', () => {
   });
 
   beforeEach(async () => {
-    const r = await s3.deleteBucket(TEST_BUCKET, true).onOk(() => s3.createBucket(TEST_BUCKET, { versioning: false }));
+    const r = await s3
+      .deleteBucket(TEST_BUCKET, true)
+      .onOk(() => s3.createBucket(TEST_BUCKET, { versioning: false }));
     r.panicIfError();
     bucket = new AccountsSharedBucket(module.get(AccountContext), s3, TEST_BUCKET);
   });

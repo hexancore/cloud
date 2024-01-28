@@ -17,7 +17,7 @@ describe('AccountBucketManager', () => {
     module = await Test.createTestingModule({
       imports: [
         HcModule.forRoot({ accountContext: { useCls: false, currentAccountId: AccountId.cs('account1') } }),
-        HcS3Module.forRoot({ bucketPrefix: 'hc-cloud-' }),
+        HcS3Module.forRoot({}),
       ],
     }).compile();
 

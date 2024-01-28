@@ -1,4 +1,4 @@
-import { DateTime } from '.yalc/@hexancore/common/lib/mjs';
+import { DateTime } from '@hexancore/common';
 
 export interface GetObjectOptions {
   versionId?: string;

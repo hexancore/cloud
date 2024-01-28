@@ -1,0 +1,18 @@
+{
+  "preset": "ts-jest",
+  "runner": "groups",
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "transform": {
+    "^.+\\.(t|j)s?$": ["@swc/jest"]
+  },
+  "moduleNameMapper": {
+    "^@$": "<rootDir>/src",
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@test/(.*)$": "<rootDir>/test/helper/$1"
+  },
+  "testMatch": ["<rootDir>/test/**/*.test.ts"],
+  "setupFiles": [],
+  "setupFilesAfterEnv": ["jest-expect-message", "<rootDir>/test/config.ts"],
+  "coverageDirectory": "./test/coverage",
+  "testEnvironment": "node"
+}

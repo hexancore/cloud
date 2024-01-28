@@ -15,7 +15,10 @@ describe(' AccountsSharedVersioningBucket', () => {
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      imports: [HcModule.forRoot({ accountContext: { useCls: false, currentAccountId: AccountId.cs('account1') } }), HcS3Module.forRoot({})],
+      imports: [
+        HcModule.forRoot({ accountContext: { useCls: false, currentAccountId: AccountId.cs('account1') } }),
+        HcS3Module.forRoot({}),
+      ],
     }).compile();
 
     s3 = module.get(S3);
@@ -28,7 +31,9 @@ describe(' AccountsSharedVersioningBucket', () => {
   });
 
   beforeEach(async () => {
-    const r = await s3.deleteBucket(TEST_BUCKET, true).onOk(() => s3.createBucket(TEST_BUCKET, { versioning: true }));
+    const r = await s3
+      .deleteBucket(TEST_BUCKET, true)
+      .onOk(() => s3.createBucket(TEST_BUCKET, { versioning: true }));
     r.panicIfError();
     bucket = new AccountsSharedVersioningBucket(module.get(AccountContext), s3, TEST_BUCKET);
   });
@@ -59,8 +64,12 @@ describe(' AccountsSharedVersioningBucket', () => {
       expect(current).toMatchSuccessResult(expect.any(S3PutObjectOutput));
       expect(await bucket.getAsString(key)).toMatchSuccessResult('test_body_new');
 
-      expect(await bucket.getAsString(key, {versionId: firstPut.v.versionId})).toMatchSuccessResult("test_body");
-      expect(await bucket.getAsString(key, {versionId: current.v.versionId})).toMatchSuccessResult("test_body_new");
+      expect(await bucket.getAsString(key, { versionId: firstPut.v.versionId })).toMatchSuccessResult(
+        'test_body',
+      );
+      expect(await bucket.getAsString(key, { versionId: current.v.versionId })).toMatchSuccessResult(
+        'test_body_new',
+      );
     });
   });
 
