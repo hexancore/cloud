@@ -1,6 +1,6 @@
 import { PutObjectCommandOutput } from '@aws-sdk/client-s3';
 import { S3ObjectId } from '../../S3ObjectId';
-import { LogicError } from '@hexancore/common/lib/mjs';
+import { LogicError } from '@hexancore/common';
 
 export class S3PutObjectOutput {
   public constructor(public readonly id: S3ObjectId, private o: PutObjectCommandOutput) {}
