@@ -1513,8 +1513,8 @@ __metadata:
   resolution: "@hexancore/cloud@workspace:."
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.501.0"
-    "@hexancore/common": "npm:^0.13.1"
-    "@hexancore/core": "npm:^0.13.1"
+    "@hexancore/common": "npm:^0.13.2"
+    "@hexancore/core": "npm:^0.13.2"
     "@hexancore/mocker": "npm:^1.1.2"
     "@liaoliaots/nestjs-redis": "npm:^9.0.5"
     "@nestjs/bull": "npm:^10.0.1"
@@ -1561,13 +1561,14 @@ __metadata:
     typescript: "npm:5.3.3"
   peerDependencies:
     "@aws-sdk/client-s3": ^3.501.0
-    "@hexancore/core": ^0.13.1
+    "@hexancore/common": ^0.13.2
+    "@hexancore/core": ^0.13.2
   languageName: unknown
   linkType: soft
 
-"@hexancore/common@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "@hexancore/common@npm:0.13.1"
+"@hexancore/common@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "@hexancore/common@npm:0.13.2"
   dependencies:
     "@js-joda/core": "npm:^5.6.1"
     axios: "npm:^1.5.0"
@@ -1578,20 +1579,19 @@ __metadata:
     string.prototype.matchall: "npm:^4.0.10"
     tslib: "npm:^2.5.0"
     xss: "npm:^1.0.10"
-  checksum: 41ad1c0923499331c4733c6d713004e31d6f71b2b239dbccfcdd01aeada110e6a5d3d30389b423870141a3809781ed9a93fd2d208e956787dda7b372af100667
+  checksum: be040befb52297fde1fcab8f696c97e15dc02e7bb0bb486e5cd91c7a8b6d2ac045a4a1372fd13aa0066e972339e63ba62f3f570b370ce8d2ee94a629a5d8644a
   languageName: node
   linkType: hard
 
-"@hexancore/core@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "@hexancore/core@npm:0.13.1"
+"@hexancore/core@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "@hexancore/core@npm:0.13.2"
   dependencies:
     "@fastify/cookie": "npm:9.0.4"
     "@fastify/cors": "npm:8.3.0"
     "@fastify/middie": "npm:8.3.0"
     "@fastify/multipart": "npm:7.7.3"
     "@fastify/static": "npm:^6.10.2"
-    "@hexancore/common": "npm:^0.13.1"
     bull: "npm:^4.8.4"
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.0"
@@ -1611,6 +1611,7 @@ __metadata:
     tslib: "npm:^2.5.0"
     typescript-chained-error: "npm:^1.6.0"
   peerDependencies:
+    "@hexancore/common": ^0.13.2
     "@liaoliaots/nestjs-redis": ^9.0.5
     "@nestjs/bull": ^10.0.1
     "@nestjs/cli": ^10.1.11
@@ -1623,7 +1624,7 @@ __metadata:
     nestjs-cls: ^3.6.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.8.0
-  checksum: 12f315081819ede63dd39e054eb027df6ab1da5ada9b8a47ed2e9ec8435779922c1cb743371c94edd25c64b4163ac00aea7973b4e431233daa644530af23daab
+  checksum: b9a869d9909809df86ced428d2fdbcf400bc4cbf5282ea384870a5ef5b47d7c0b7f2dbfa9da8bd5da89ad3acbc398210dfca75f61610788aa9d324515baba206
   languageName: node
   linkType: hard
 

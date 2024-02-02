@@ -4,24 +4,32 @@
 
 import { S3, HcS3Module, S3ObjectId, S3PutObjectOutput, S3DeleteObjectOutput } from '@';
 import { S3Errors } from '@/Infrastructure/S3/S3Errors';
-import { AccountId } from '@hexancore/common';
 import { HcModule } from '@hexancore/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AccountBucketManager', () => {
+describe('S3', () => {
   let module: TestingModule;
   let s3: S3;
-  const TEST_BUCKET = 'test-s3-manager';
+  const TEST_BUCKET = 'test-s3';
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     module = await Test.createTestingModule({
       imports: [
-        HcModule.forRoot({ accountContext: { useCls: false, currentAccountId: AccountId.cs('account1') } }),
+        HcModule.forRoot({}),
         HcS3Module.forRoot({}),
       ],
     }).compile();
 
     s3 = module.get(S3);
+  });
+
+  afterAll(async () => {
+    if (module) {
+      await module.close();
+    }
+  });
+
+  beforeEach(async () => {
     const r = await s3.deleteBucket(TEST_BUCKET, true);
     r.panicIfError();
   });
@@ -29,7 +37,6 @@ describe('AccountBucketManager', () => {
   afterEach(async () => {
     if (module) {
       await s3.deleteBucket(TEST_BUCKET, true);
-      await module.close();
     }
   });
 
