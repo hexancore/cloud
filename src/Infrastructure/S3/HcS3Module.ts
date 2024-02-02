@@ -24,6 +24,7 @@ const s3ClientProviderFactory = (s3ClientToken: InjectionToken, configPath?: str
       retryMode: 'adaptive',
       maxAttempts: 5,
       
+
     });
   },
 });

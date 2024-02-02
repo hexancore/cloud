@@ -4,6 +4,9 @@ services:
     image: "zenko/cloudserver:latest-7.70.10"
     container_name: ${PROJECT}-s3
     restart: always
+    mem_limit: 512M
+    tmpfs:
+      - /tmp:size=256M
     ports:
       - ${ZENKO_HOST_PORT}:8000
     environment:

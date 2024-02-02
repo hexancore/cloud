@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Hexancore</h1>
-<p align="center">Fullstack typescript framework based on NestJS for building epic hexagonal architecture designed apps.</p>
+<p align="center"><i>Full Stack TypeScript framework for building epic Hexagonal Architecture designed apps.</i>i></p>
 <h2 align="center">Package: Cloud</h2>
 <p align="center">
   <img alt="Build" src="https://img.shields.io/github/actions/workflow/status/hexancore/cloud/release.yml">

@@ -22,8 +22,6 @@ describe(' AccountsSharedBucket', () => {
       ],
     }).compile();
 
-    module.enableShutdownHooks();
-
     s3 = module.get(S3);
   });
 
