@@ -6,8 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Bucket prefix
+ 
+### Changed
+
+- Updated @hexancore/common@0.13.2
+- Updated @hexancore/core@0.13.2
+
+## [0.1.0] - 2023-01-26
+
 ### Added
 
-- initial release
+- Initial release
 - HcS3Module
- 
+
+[unreleased] https://github.com/hexancore/cloud/compare/0.1.0...HEAD    
+[0.1.0] https://github.com/hexancore/cloud/releases/tag/0.1.0  
