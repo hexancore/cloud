@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- HcAppRedisModule - basic redis client 
+
 ## [0.1.1] - 2024-02-02
 
 ### Fixed
