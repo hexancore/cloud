@@ -1513,7 +1513,7 @@ __metadata:
   resolution: "@hexancore/cloud@workspace:."
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.501.0"
-    "@hexancore/common": "npm:^0.13.2"
+    "@hexancore/common": "npm:^0.13.3"
     "@hexancore/core": "npm:^0.13.2"
     "@hexancore/mocker": "npm:^1.1.2"
     "@liaoliaots/nestjs-redis": "npm:^9.0.5"
@@ -1561,25 +1561,26 @@ __metadata:
     typescript: "npm:5.3.3"
   peerDependencies:
     "@aws-sdk/client-s3": ^3.501.0
-    "@hexancore/common": ^0.13.2
+    "@hexancore/common": ^0.13.3
     "@hexancore/core": ^0.13.2
+    ioredis: ^5.3.2
   languageName: unknown
   linkType: soft
 
-"@hexancore/common@npm:^0.13.2":
-  version: 0.13.2
-  resolution: "@hexancore/common@npm:0.13.2"
+"@hexancore/common@npm:^0.13.3":
+  version: 0.13.3
+  resolution: "@hexancore/common@npm:0.13.3"
   dependencies:
     "@js-joda/core": "npm:^5.6.1"
     axios: "npm:^1.5.0"
     class-transformer: "npm:^0.5.1"
     fastest-validator: "npm:^1.11.1"
     lambda-log: "npm:^3.1.0"
-    nanoid: "npm:^3.1.28"
+    nanoid: "npm:3"
     string.prototype.matchall: "npm:^4.0.10"
     tslib: "npm:^2.5.0"
     xss: "npm:^1.0.10"
-  checksum: be040befb52297fde1fcab8f696c97e15dc02e7bb0bb486e5cd91c7a8b6d2ac045a4a1372fd13aa0066e972339e63ba62f3f570b370ce8d2ee94a629a5d8644a
+  checksum: c2776e84c9afb94c4b79468677482b12c920e4eb2005119bc546e01cdc700497d36dc321a990714d5ef5443734d240595492f6f7458feb7e9f7d37ac729d5179
   languageName: node
   linkType: hard
 
@@ -8058,7 +8059,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.28":
+"nanoid@npm:3":
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
   bin:

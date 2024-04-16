@@ -2,3 +2,7 @@ core:
   s3:
     endpoint: http://localhost:20011
     region: eu-west-1
+  redis:
+    host: 127.0.0.1
+    port: 20012
+    enableReadyCheck: false

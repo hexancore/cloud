@@ -7,6 +7,7 @@ runs:
     - name: docker-compose up
       shell: bash
       run: |
+        make init_tmp
         make up
     # Yarn test
     - name: test

@@ -16,3 +16,18 @@ services:
       SCALITY_SECRET_ACCESS_KEY: ${ZENKO_SECRET_ACCESS_KEY}
       LISTEN_ADDR: 0.0.0.0
       S3BACKEND: mem
+  redis:
+    image: bitnami/redis:7.2
+    container_name: ${PROJECT}-redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_AOF_ENABLED=no
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_ACLFILE=/bitnami/redis/config/users.acl
+    ports:
+      - ${REDIS_HOST_PORT}:6379
+    volumes:
+      - ${HOST_CONFIG_DIR}/redis:/bitnami/redis/config
+    tmpfs:
+      - /bitnami/redis/data:size=8M
