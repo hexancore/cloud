@@ -1514,7 +1514,7 @@ __metadata:
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.501.0"
     "@hexancore/common": "npm:^0.13.3"
-    "@hexancore/core": "npm:^0.13.2"
+    "@hexancore/core": "npm:^0.14.0"
     "@hexancore/mocker": "npm:^1.1.2"
     "@liaoliaots/nestjs-redis": "npm:^9.0.5"
     "@nestjs/bull": "npm:^10.0.1"
@@ -1562,7 +1562,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/client-s3": ^3.501.0
     "@hexancore/common": ^0.13.3
-    "@hexancore/core": ^0.13.2
+    "@hexancore/core": ^0.14.0
     ioredis: ^5.3.2
   languageName: unknown
   linkType: soft
@@ -1584,9 +1584,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hexancore/core@npm:^0.13.2":
-  version: 0.13.2
-  resolution: "@hexancore/core@npm:0.13.2"
+"@hexancore/core@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "@hexancore/core@npm:0.14.0"
   dependencies:
     "@fastify/cookie": "npm:9.0.4"
     "@fastify/cors": "npm:8.3.0"
@@ -1625,7 +1625,7 @@ __metadata:
     nestjs-cls: ^3.6.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.8.0
-  checksum: b9a869d9909809df86ced428d2fdbcf400bc4cbf5282ea384870a5ef5b47d7c0b7f2dbfa9da8bd5da89ad3acbc398210dfca75f61610788aa9d324515baba206
+  checksum: b60f1826cdd67554fefac54e1cc9884ea186df8cb5b37e017a341ffb424fc11b26d646e7f4a26fd5e9e2ec0ef228c3b25c3557f178af5c8919dc4fc1118f25fa
   languageName: node
   linkType: hard
 
