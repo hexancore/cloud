@@ -2,8 +2,7 @@
  * @group integration
  */
 
-import { S3, HcS3Module, S3ObjectId, S3PutObjectOutput, S3DeleteObjectOutput } from '@';
-import { S3Errors } from '@/Infrastructure/S3/S3Errors';
+import { S3, HcS3Module, S3ObjectId, S3PutObjectOutput, S3DeleteObjectOutput, S3Errors } from '@/s3';
 import { HcModule } from '@hexancore/core';
 import { Test, TestingModule } from '@nestjs/testing';
 

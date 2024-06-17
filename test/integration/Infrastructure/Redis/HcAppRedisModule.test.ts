@@ -3,8 +3,8 @@
  */
 
 import { Test, TestingModule } from '@nestjs/testing';
-import { type Redis } from 'ioredis';
-import { HcAppRedisModule, InjectAppRedis } from '@';
+import { Redis } from 'ioredis';
+import { HcAppRedisModule, InjectAppRedis } from '@/redis';
 import { Injectable } from '@nestjs/common';
 import { HcAppConfigModule } from '@hexancore/core';
 
@@ -14,8 +14,8 @@ class T {
 }
 
 describe('HcAppRedisModule', () => {
-  let module: TestingModule;
-  let redis: Redis;
+  let module!: TestingModule|null;
+  let redis!: Redis| null;
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
@@ -37,8 +37,8 @@ describe('HcAppRedisModule', () => {
 
   test('connected', async () => {
     const key = 'app:test';
-    await redis.set(key, 'test');
-    const r = await redis.get(key);
+    await redis!.set(key, 'test');
+    const r = await redis!.get(key);
 
     expect(r).toEqual('test');
   }, 10000);
