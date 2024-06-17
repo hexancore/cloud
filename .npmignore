@@ -26,3 +26,5 @@ docker/
 node_modules/
 Makefile
 .swcrc
+CHANGELOG
+jest.config.ts

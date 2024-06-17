@@ -1,1 +1,1 @@
-export * from './Infrastructure';
+export const NONE = 1;

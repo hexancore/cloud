@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "strict": true,
+    "moduleResolution": "Node16",
+    "module": "Node16",
+    "target": "ES2022",
+    "lib": [
+      "ES2022"
+    ],
     "noImplicitThis": false,
     "noImplicitAny": false,
     "importHelpers": true,
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -18,16 +22,15 @@
     "useDefineForClassFields": false,
     "allowJs": true,
     "types": ["jest", "reflect-metadata", "node"],
-    "incremental": true,
-    "lib": ["es2022"],
+    "incremental": false,
+    "resolveJsonModule": true,
     "outDir": "./lib",
     "baseUrl": "./",
     "paths": {
-      "@": ["src"],
-      "@/*": ["src/*"],
+      "@/redis": ["src/Infrastructure/Redis"],
+      "@/s3": ["src/Infrastructure/S3"],
       "@test/*": ["test/helper/*"]
-    },
-
+    }
   },
   "files": ["node_modules/jest-expect-message/types/index.d.ts"],
   "include": ["src/**/*", "test/**/*"],

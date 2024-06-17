@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- updated @hexancore/core@0.15.0
+- redis and s3 separate exports
+
 ## [0.1.3] - 2024-04-27
 
 ### Changed

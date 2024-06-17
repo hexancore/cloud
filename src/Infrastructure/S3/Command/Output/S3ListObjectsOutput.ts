@@ -4,7 +4,7 @@ import { S3 } from '../../S3';
 import { S3ObjectMeta } from '../S3ObjectMeta';
 
 export class S3ListObjectsOutput {
-  public constructor(private s3: S3, private options: { bucket: string; prefix: string; maxKeys?: number }) {}
+  public constructor(private s3: S3, private options: { bucket: string; prefix?: string; maxKeys?: number }) {}
 
   public async *keys(): AsyncGenerator<R<string[]>, void, unknown> {
     for await (const r of this.objects()) {

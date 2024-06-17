@@ -2,7 +2,7 @@
   "name": "@hexancore/cloud",
   "version": "0.1.3",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engine-strict": true,
   "keywords": [
@@ -11,47 +11,10 @@
     "cloud",
     "s3"
   ],
-  "description": "Core to build hexagonal architecture designed apps",
-  "author": {
-    "name": "Andrzej Wasiak",
-    "email": "contact@andrzejwasiak.pl",
-    "url": "https://andrzejwasiak.pl"
-  },
+  "description": "Full-Stack TypeScript Framework for building epic HexArch designed applications",
+  "author": "Andrzej Wasiak",
   "license": "MIT",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./lib/index.d.ts"
-      ],
-      "testutil": [
-        "./lib/Test/index.d.ts"
-      ]
-    }
-  },
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./lib/index.d.ts",
-        "default": "./lib/index.js"
-      },
-      "default": {
-        "types": "./lib/index.d.ts",
-        "default": "./lib/index.js"
-      }
-    },
-    "./testutil": {
-      "import": {
-        "types": "./lib/Test/index.d.ts",
-        "default": "./lib/Test/index.js"
-      },
-      "default": {
-        "types": "./lib/Test/index.d.ts",
-        "default": "./lib/Test/index.js"
-      }
-    }
-  },
+  "homepage": "https://hexancore.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hexancore/cloud.git"
@@ -59,50 +22,60 @@
   "bugs": {
     "url": "https://github.com/hexancore/cloud/issues"
   },
-  "homepage": "https://github.com/hexancore/cloud.git",
+  "type": "commonjs",
+  "exports": {
+    "./s3": {
+      "default": {
+        "types": "./lib/Infrastructure/S3/index.d.ts",
+        "default": "./lib/Infrastructure/S3/index.js"
+      }
+    },
+    "./redis": {
+      "default": {
+        "types": "./lib/Infrastructure/Redis/index.d.ts",
+        "default": "./lib/Infrastructure/Redis/index.js"
+      }
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "nest -p tsconfig.build.json build",
+    "build": "rm -fr lib && nest -p tsconfig.build.json build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
-    "test": "jest --config .jestrc.json --runInBand",
-    "test:clearCache": "jest --config .jestrc.json --clearCache",
-    "test:unit": "jest --config .jestrc.json --runInBand  --group=unit",
-    "test:watch": "jest --config .jestrc.json --runInBand --watchAll",
-    "test:cov": "jest --config .jestrc.json --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --config .jestrc.json --runInBand",
-    "prepublish": "rm -fr ./lib && yarn run build"
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
+    "test": "jest --config  --runInBand",
+    "test:clearCache": "jest  --clearCache",
+    "test:unit": "jest  --runInBand  --group=unit",
+    "test:watch": "jest --runInBand --watchAll",
+    "test:cov": "jest  --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "prepublish": "yarn run build"
   },
   "peerDependencies": {
     "@aws-sdk/client-s3": "^3.501.0",
-    "@hexancore/common": "^0.13.3",
-    "@hexancore/core": "^0.14.0",
+    "@hexancore/common": "^0.14.0",
+    "@hexancore/core": "^0.15.0",
     "ioredis": "^5.3.2"
   },
   "dependencies": {
+    "reflect-metadata": "^0.1.3",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.501.0",
-    "@hexancore/common": "^0.13.3",
-    "@hexancore/core": "^0.14.0",
+    "@hexancore/common": "^0.14.0",
+    "@hexancore/core": "^0.15.0",
     "@hexancore/mocker": "^1.1.2",
-    "@liaoliaots/nestjs-redis": "^9.0.5",
-    "@nestjs/bull": "^10.0.1",
-    "@nestjs/cli": "^10.2.1",
-    "@nestjs/common": "^10.1.3",
+    "@nestjs/cli": "^10.3.2",
+    "@nestjs/common": "^10.3.9",
     "@nestjs/config": "^3.0.0",
-    "@nestjs/core": "^10.1.3",
-    "@nestjs/cqrs": "^10.2.5",
-    "@nestjs/platform-fastify": "^10.3.0",
-    "@nestjs/swagger": "^7.1.17",
-    "@nestjs/testing": "^10.1.3",
-    "@swc/core": "^1.3.101",
-    "@swc/helpers": "^0.5.3",
-    "@swc/jest": "^0.2.29",
-    "@types/benchmark": "^2.1.4",
+    "@nestjs/core": "^10.3.9",
+    "@nestjs/cqrs": "^10.2.7",
+    "@nestjs/platform-fastify": "^10.3.9",
+    "@nestjs/swagger": "^7.1.8",
+    "@nestjs/testing": "^10.3.9",
     "@types/jest": "27.0.*",
     "@types/js-yaml": "^4.0.5",
     "@types/lambda-log": "^3.0.0",
@@ -111,7 +84,6 @@
     "@typescript-eslint/parser": "^6.7.4",
     "axios": "^1.5.1",
     "axios-mock-adapter": "^1.22.0",
-    "bull": "^4.12.0",
     "eslint": "^8.3.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "ioredis": "^5.3.2",
@@ -120,17 +92,14 @@
     "jest-expect-message": "^1.1.3",
     "jest-runner": "29.6.*",
     "jest-runner-groups": "^2.2.0",
-    "nestjs-cls": "^3.6.0",
-    "reflect-metadata": "^0.1.13",
+    "nestjs-cls": "^4.3.0",
     "rxjs": "^7.8.0",
     "string.prototype.matchall": "^4.0.10",
-    "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "ts-paths-esm-loader": "^1.4.3",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^3.14.0",
-    "typescript": "5.3.3"
+    "typescript": "5.4.5"
   },
   "packageManager": "yarn@4.0.2"
 }

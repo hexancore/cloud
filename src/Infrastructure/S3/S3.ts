@@ -26,7 +26,7 @@ import {
   S3ServiceException,
   StorageClass,
 } from '@aws-sdk/client-s3';
-import { AR, ARW, AppError, ERR, InternalError, NeverError, OK, OKA, P } from '@hexancore/common';
+import { AR, ARW, AppError, ERR, InternalError, NeverError, OK, OKA, P, StdErrors } from '@hexancore/common';
 import { NodeJsRuntimeStreamingBlobPayloadInputTypes } from '@smithy/types';
 import {
   S3DeleteObjectOutput,
@@ -103,8 +103,8 @@ export class S3 {
 
     return this.send<HeadBucketCommandOutput>(command)
       .mapToTrue()
-      .onErr((e: AppError<InternalError, S3ServiceException>) => {
-        const error: S3ServiceException = e.error;
+      .onErr((e) => {
+        const error: S3ServiceException = e.error as S3ServiceException;
         if (error instanceof S3ServiceException && error['$metadata'].httpStatusCode === 404) {
           return OK(false);
         }
@@ -119,7 +119,7 @@ export class S3 {
           return OKA(true);
         }
         return this.send<GetBucketVersioningCommandOutput>(new GetBucketVersioningCommand({ Bucket: bucket })).onOk((o) => {
-          let deleteObjectsCommandSend: AR<S3DeleteObjectsOutput, NeverError | S3Errors<'bucket_not_exist'>> = OKA(null);
+          let deleteObjectsCommandSend: AR<S3DeleteObjectsOutput|null, NeverError | S3Errors<'bucket_not_exist'>> = OKA(null);
           if (force) {
             const versioning = o.Status === 'Enabled';
             deleteObjectsCommandSend = versioning ? this.deleteObjectsVersions(bucket, 'all') : this.deleteObjects(bucket, 'all');
@@ -143,7 +143,7 @@ export class S3 {
     const command = new ListBucketsCommand({});
     return this.send<ListBucketsCommandOutput>(command).onOk((o) => {
       return new S3ListBucketsOutput(
-        o.Buckets.filter((v) => v.Name.startsWith(this.bucketPrefix)).map((v) => v.Name.substring(this.bucketPrefix.length)),
+        o.Buckets!.filter((v) => v.Name!.startsWith(this.bucketPrefix)).map((v) => v.Name!.substring(this.bucketPrefix.length)),
         o,
       );
     });
@@ -195,6 +195,8 @@ export class S3 {
         if (e.error instanceof NoSuchKey) {
           return ERR(S3Errors.object_not_exist, 404, { id });
         }
+
+        return ERR(e);
       });
   }
 
@@ -233,7 +235,7 @@ export class S3 {
   public deleteObjects(bucket: string, prefix: string | 'all'): AR<S3DeleteObjectsOutput, S3Errors<'bucket_not_exist'>> {
     return ARW(
       (async () => {
-        prefix = prefix === 'all' ? undefined : prefix;
+        prefix = prefix === 'all' ? undefined as any : prefix;
 
         for await (const r of this.listObjects(bucket, prefix).toDelete()) {
           if (r.isError()) {
@@ -262,7 +264,7 @@ export class S3 {
   public deleteObjectsVersions(bucket: string, prefix: string | 'all'): AR<S3DeleteObjectsOutput, S3Errors<'bucket_not_exist'>> {
     return ARW(
       (async () => {
-        prefix = prefix === 'all' ? undefined : prefix;
+        prefix = prefix === 'all' ? undefined as any : prefix;
         for await (const r of this.listObjectsVersions(bucket, prefix).toDelete()) {
           if (r.isError()) {
             return r as any;

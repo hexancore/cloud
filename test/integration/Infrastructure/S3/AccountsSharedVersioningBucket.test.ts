@@ -2,7 +2,7 @@
  * @group integration
  */
 
-import { AccountsSharedVersioningBucket, HcS3Module, S3, S3DeleteObjectsOutput, S3PutObjectOutput } from '@';
+import { AccountsSharedVersioningBucket, HcS3Module, S3, S3DeleteObjectsOutput, S3PutObjectOutput } from '@/s3';
 import { AccountId } from '@hexancore/common';
 import { AccountContext, HcModule } from '@hexancore/core';
 import { Test, TestingModule } from '@nestjs/testing';

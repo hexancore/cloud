@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+
 import { AppMeta, EnvAppMetaProvider } from '@hexancore/common';
 import path from 'path';
 import { existsSync, mkdirSync } from 'fs';

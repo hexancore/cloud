@@ -53,7 +53,7 @@ export const RedisProviderFactory = (o: RedisProviderFactoryOptions): FactoryPro
     try {
       await redis.connect();
     } catch (e) {
-      INTERNAL_ERROR(e);
+      INTERNAL_ERROR(e as Error);
     }
 
     return redis;
