@@ -1,5 +1,5 @@
 import { Redis, RedisOptions } from 'ioredis';
-import { getLogger, ERR, AppErrorCode, INTERNAL_ERROR } from '@hexancore/common';
+import { getLogger, INTERNAL_ERROR } from '@hexancore/common';
 import { AppConfig } from '@hexancore/core';
 import type { FactoryProvider, InjectionToken } from '@nestjs/common';
 
@@ -17,14 +17,8 @@ export const RedisProviderFactory = (o: RedisProviderFactoryOptions): FactoryPro
   inject: [AppConfig],
   useFactory: async (appConfig: AppConfig): Promise<Redis> => {
     const LOGGER = getLogger(`cloud.infra.redis.${o.id}`, ['core', 'infra', 'redis']);
-    const config = appConfig.config.get(o.configKey);
-    if (config === undefined) {
-      ERR('core.infra.redis.empty_config', AppErrorCode.INTERNAL_ERROR).panicIfError();
-    }
-
-    const secretGetResult = appConfig.secrets.getAsBasicAuth(o.authSecretKey);
-    secretGetResult.panicIfError();
-    const auth = secretGetResult.v;
+    const config = appConfig.getOrPanic<any>(o.configKey);
+    const auth = appConfig.getSecretAsBasicAuth(o.authSecretKey);
 
     const retryOptions = {
       warnEveryXTimes: config.retry?.warnEveryXTimes ?? 5,
@@ -48,14 +42,14 @@ export const RedisProviderFactory = (o: RedisProviderFactoryOptions): FactoryPro
       },
     };
 
-    const redis = new Redis(redisOptions);
-
+    let redis: Redis|null = null;
     try {
+      redis = new Redis(redisOptions);
       await redis.connect();
     } catch (e) {
-      INTERNAL_ERROR(e as Error);
+      INTERNAL_ERROR(e as Error).panic();
     }
 
-    return redis;
+    return redis as Redis;
   }
 });

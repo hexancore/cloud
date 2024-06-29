@@ -1,0 +1,39 @@
+name: Publish
+env:
+  HUSKY: 0
+on:
+  release:
+    types: [published]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # 4.1.6
+
+      - name: Yarn install
+        uses: hexancore/yarn-ci-install@ba9baf131eba84b6c86efb46375a530a3098bb04 # 0.1.0
+      - name: Test
+        uses: ./.github/actions/test
+  publish:
+    needs: [check]
+    permissions:
+      contents: write
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # 4.1.6
+      - name: Yarn install
+        uses: hexancore/yarn-ci-install@ba9baf131eba84b6c86efb46375a530a3098bb04 # 0.1.0
+      - name: Build
+        run: yarn build
+
+      # Publish package
+      - name: Publish
+        shell: bash
+        run: |
+          npm publish --provenance --access public --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
