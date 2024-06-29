@@ -9,22 +9,18 @@ const s3ClientProviderFactory = (s3ClientToken: InjectionToken, configPath?: str
   inject: [AppConfig],
   useFactory: (c: AppConfig) => {
     configPath = configPath ?? 'core.s3';
-    const secretKey: string = c.config.get(configPath + '.secretKey', 'core.s3');
-    const credsResult = c.secrets.getFromJson<{ accessKeyId: string; secretAccessKey: string }>(secretKey);
-    credsResult.panicIfError();
-    const creds = credsResult.v;
+    const secretKey: string = c.getOrDefault<string>(configPath + '.secretKey', 'core.s3');
+    const creds = c.getSecretFromJson<{ accessKeyId: string; secretAccessKey: string }>(secretKey);
 
     return new S3Client({
-      region: c.config.get(configPath + '.region'),
-      endpoint: c.config.get(configPath + '.endpoint'),
+      region: c.getOrPanic(configPath + '.region'),
+      endpoint: c.getOrPanic(configPath + '.endpoint'),
       credentials: {
         accessKeyId: creds.accessKeyId ?? '',
         secretAccessKey: creds.secretAccessKey ?? '',
       },
       retryMode: 'adaptive',
       maxAttempts: 5,
-      
-
     });
   },
 });
@@ -50,7 +46,7 @@ const { ConfigurableModuleClass } = new ConfigurableModuleBuilder<S3ModuleOption
     def.providers.push({
       provide: S3,
       inject: [extras.s3ClientToken, AppConfig],
-      useFactory: (client: S3Client, c: AppConfig) => new S3(client, c.config.get(extras.configPath + '.bucketPrefix', '')),
+      useFactory: (client: S3Client, c: AppConfig) => new S3(client, c.getOrDefault(extras.configPath + '.bucketPrefix', '')),
     });
 
     def.exports.push(S3);
